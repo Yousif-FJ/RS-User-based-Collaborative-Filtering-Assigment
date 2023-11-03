@@ -5,7 +5,9 @@ The assignment PDF were included.
 
 #### How To Run
 The assignment folder contains forders for each assignment. Run the main.py in the assigment folder.
+
     python main.py
-The Python code expect the following packages global packages:
+
+The Python code expect the following installed global packages:
 - pandas
 - sciPy
