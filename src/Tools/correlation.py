@@ -3,8 +3,7 @@ import pandas as pd
 from util import *
 
 
-def CalculateCorrelation(userRatings1 : pd.Series, userRatings2 : pd.Series) -> float:
-        
+def CalculateCorrelation(userRatings1 : pd.Series, userRatings2 : pd.Series) -> float:        
         # find only the values which are present in both series for the same movie
         (array1, array2) = filterNa(userRatings1, userRatings2)
 
@@ -17,7 +16,7 @@ def CalculateCorrelation(userRatings1 : pd.Series, userRatings2 : pd.Series) -> 
         return correaltion
 
 
-def findSimilarUsers(data : pd.DataFrame, userRating : pd.Series) -> pd.Series:
+def getSimilarUsersCorrelations(data : pd.DataFrame, userRating : pd.Series) -> pd.Series:
 
     movieIdWithCorrelation = dict()
 
@@ -32,4 +31,4 @@ def findSimilarUsers(data : pd.DataFrame, userRating : pd.Series) -> pd.Series:
 
     movieIdWithCorrelation = pd.Series(movieIdWithCorrelation).dropna().sort_values(ascending=False)
 
-    return movieIdWithCorrelation.head(40)
+    return movieIdWithCorrelation.loc[lambda value : value > 0.4]

@@ -8,6 +8,10 @@ def predictRating(similarUsersRating : pd.DataFrame, targetUserRatings : pd.Seri
     #filter users who don't have rating on the target movie
     similarUsersRating = similarUsersRating[~similarUsersRating[targetMovieId].isna()]
 
+    #no ratings on the target movie for the given similar users
+    if len(similarUsersRating) == 0:
+        return None
+
     numerator = 0
     for userId, ratings in similarUsersRating.iterrows():
         targetMovieRatingForUser = ratings.get(targetMovieId)

@@ -1,12 +1,13 @@
 import pandas as pd
 import os
-from correlation import findSimilarUsers
+from correlation import getSimilarUsersCorrelations
 from prediction import predictRating
 from util import *
 
 
-path = os.path.join(os.getcwd(),"ratings.csv")
+path = os.path.join(os.getcwd(), "ratings.csv")
 data = pd.read_csv(path)
+
 # --------------------------------- Answer a
 print('Showing the top rows')
 print(data.head())
@@ -21,14 +22,16 @@ data = data[['userId','movieId','rating']]
 reshapedData = data.pivot(index='userId', columns='movieId', values='rating')
 
 # select one user rating to compare againt the rest of the data
-user1Ratings = reshapedData.loc[1]
+targetUserId = 1
+predictionTargetMovieId = 101
 
-similarUsersCorrelation = findSimilarUsers(reshapedData, user1Ratings)
+# get the target user ratings
+targetUserRatings = reshapedData.loc[targetUserId]
+
+# Find similar users to the target user
+similarUsersCorrelation = getSimilarUsersCorrelations(reshapedData, targetUserRatings)
 
 similarUsersRatings = reshapedData.loc[similarUsersCorrelation.index]
+ 
 
-
-predictionTargetMovieId = 101
-print(predictRating(similarUsersRatings, user1Ratings, predictionTargetMovieId))
-# user2MovieRatingSeries = reshapedData.loc[473]
-# visualizeTheData(user1Ratings, user2MovieRatingSeries)
+print(predictRating(similarUsersRatings, targetUserRatings, predictionTargetMovieId))
