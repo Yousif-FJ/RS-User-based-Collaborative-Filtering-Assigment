@@ -1,4 +1,3 @@
-python .\assignment1.py
 Showing the top rows
    userId  movieId  rating  timestamp
 0       1        1     4.0  964982703
@@ -7,7 +6,7 @@ Showing the top rows
 3       1       47     5.0  964983815
 4       1       50     5.0  964982931
 Number of ratings in the dataset 100836
-ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+local-packages\Python311\site-packages\scipy\stats\_stats_py.py:4781: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
   warnings.warn(stats.ConstantInputWarning(msg))
 Most similar users to the user with Id 1
 473    0.962250
@@ -31,14 +30,14 @@ Most similar users to the user with Id 1
 207    0.701646
 dtype: float64
 Most relevant movies to the user with Id 1
-58      5.0
-1057    5.0
-52      5.0
-818     5.0
-25      5.0
-2599    5.0
-319     5.0
-923     5.0
-17      5.0
-6       5.0
+319     6.769157
+1732    6.769157
+6       6.769157
+2599    6.699713
+2692    6.699713
+2700    6.699713
+2762    6.699713
+2858    6.606491
+4223    6.222049
+923     6.105510
 dtype: float64

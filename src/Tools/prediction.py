@@ -18,24 +18,31 @@ def findBestMoviesForUser(similarUsersRatings : pd.DataFrame, targetUserRatings,
 
 
 
-
 def predictRating(similarUsersRating : pd.DataFrame, targetUserRatings : pd.Series, targetMovieId : int) -> float :
 
     #filter users who don't have rating on the target movie
     similarUsersRating = similarUsersRating[~similarUsersRating[targetMovieId].isna()]
 
     #no ratings on the target movie for the given similar users
-    if len(similarUsersRating) == 0:
+    if len(similarUsersRating) < 1:
         return None
+
+    targetUserRatingsAverage = targetUserRatings.mean()
 
     numerator = 0
     for userId, ratings in similarUsersRating.iterrows():
-        targetMovieRatingForUser = ratings.get(targetMovieId)
-        numerator += CalculateCorrelation(ratings, targetUserRatings) * targetMovieRatingForUser
+        targetMovieRating = ratings.get(targetMovieId)
+        IteratingUserRatingsAverage = ratings.mean()
+        correlationBetweenUserRatings = CalculateCorrelation(targetUserRatings,ratings)
+
+        RatingDifference = targetMovieRating - IteratingUserRatingsAverage
+        numerator += correlationBetweenUserRatings * RatingDifference
     
     denominator = 0
     for userId, ratings in similarUsersRating.iterrows():
-        denominator += CalculateCorrelation(ratings, targetUserRatings)
+        denominator += CalculateCorrelation(targetUserRatings, ratings)
 
-    return numerator/denominator
+    neighborBias = numerator/denominator
+
+    return targetUserRatingsAverage + neighborBias
 

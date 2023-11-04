@@ -38,4 +38,3 @@ bestMoviesForTargetUser = findBestMoviesForUser(similarUsersRatings, targetUserR
 
 print(f'Most relevant movies to the user with Id {targetUserId}')
 print(bestMoviesForTargetUser)
-
