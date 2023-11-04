@@ -1,6 +1,22 @@
 import pandas as pd
 
-from correlation import CalculateCorrelation
+from .correlation import *
+
+
+def findBestMoviesForUser(similarUsersRatings : pd.DataFrame, targetUserRatings, movieIds : pd.Series):
+    movieIdWithRating = dict()
+
+    for movieId in movieIds.head(1000):
+        predictedRating = predictRating(similarUsersRatings, targetUserRatings, movieId)
+        if predictedRating == None:
+            continue
+        movieIdWithRating[movieId] = predictedRating
+    
+    movieIdWithRating = pd.Series(movieIdWithRating).sort_values(ascending=False)
+
+    return movieIdWithRating.head(10)
+
+
 
 
 def predictRating(similarUsersRating : pd.DataFrame, targetUserRatings : pd.Series, targetMovieId : int) -> float :

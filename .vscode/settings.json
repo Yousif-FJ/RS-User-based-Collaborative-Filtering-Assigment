@@ -1,5 +1,9 @@
 {
-    "python.analysis.extraPaths": [
-        "./src/Tools"
+    "cSpell.words": [
+        "dropna",
+        "dtype",
+        "isna",
+        "iterrows",
+        "pearsonr"
     ]
 }
