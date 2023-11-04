@@ -1,5 +1,3 @@
-#### Sample run
-
 python .\assignment1.py
 Showing the top rows
    userId  movieId  rating  timestamp
