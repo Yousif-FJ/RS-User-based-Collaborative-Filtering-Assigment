@@ -5,5 +5,8 @@
         "isna",
         "iterrows",
         "pearsonr"
+    ],
+    "cSpell.ignoreWords": [
+        "Jaccard"
     ]
 }
