@@ -8,7 +8,6 @@ Here are some things about the implementation:
 - We use threshold of 0.7 for correlation to find the similar users.
 - We used the following prediction function:
 ![predictionFunction](markdownResources/predictionFunction.png)
-- For finding the find most relevant movies for a user, we will use the first 1000 movies only, because the computation take too long and we already have 10 movies with predicted result of 5.
 - Some movie ratings we are unable to make a user preference prediction because not enough similar users in the data set. Those items are skipped when search for relevant movies.
 
 

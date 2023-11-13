@@ -6,7 +6,7 @@ from .correlation import *
 def findBestMoviesForUser(similarUsersRatings : pd.DataFrame, targetUserRatings, movieIds : pd.Series):
     movieIdWithRating = dict()
 
-    for movieId in movieIds.head(1000):
+    for movieId in movieIds:
         predictedRating = predictRating(similarUsersRatings, targetUserRatings, movieId)
         if predictedRating == None:
             continue
