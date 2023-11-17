@@ -3,37 +3,6 @@ from .SimilarityContainer import *
 from .correlation import *
 
 
-def findBestMoviesForGroup(data : pd.DataFrame, userGroupRatings : pd.DataFrame,
-                           movieIds) -> pd.Series:
-    movieIdWithRating = dict()
-    similarityContainer = SimilarityContainer(data)
-
-    for movieId in movieIds:
-        skipMovie = False
-        ratingSum = 0
-        for (userId, userRatings) in userGroupRatings.iterrows():
-
-            similarUsersRatings = similarityContainer.getSimilarUsers(userRatings)
-
-            predictedRating = predictRating(similarUsersRatings, userRatings, movieId)
-            if predictedRating == None:
-                skipMovie = True
-                break
-
-            ratingSum += predictedRating
-
-        if(skipMovie):
-            continue
-
-        numberOfUsersInAGroup = userGroupRatings.shape[0]
-        movieIdWithRating[movieId] = ratingSum/numberOfUsersInAGroup
-    
-    movieIdWithRating = pd.Series(movieIdWithRating).sort_values(ascending=False)
-
-    return movieIdWithRating.head(10)
-
-
-
 def findBestMoviesForUser(similarUsersRatings : pd.DataFrame, targetUserRatings : pd.Series,
                            movieIds) -> pd.Series:
     movieIdWithRating = dict()

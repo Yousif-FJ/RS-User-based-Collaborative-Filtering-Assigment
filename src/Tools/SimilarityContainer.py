@@ -1,6 +1,9 @@
 import pandas as pd
 from .correlation import *
 
+'''
+A class which is used to calculate and cache user similarities to make repeated calculations faster
+'''
 class SimilarityContainer:
     
     def __init__(self, data : pd.DataFrame):

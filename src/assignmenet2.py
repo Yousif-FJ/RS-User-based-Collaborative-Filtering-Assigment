@@ -1,7 +1,6 @@
 import pandas as pd
 import os
-from tools.correlation import *
-from tools.prediction import *
+from tools.groupPrediction import *
 
 path = os.path.join(os.getcwd(), "ratings.csv")
 data = pd.read_csv(path)
@@ -18,8 +17,16 @@ movieIds = data['movieId'].unique()
 # consider group of 3 users
 group = reshapedData.head(3)
 
-result = findBestMoviesForGroup(reshapedData, group, movieIds)
+
+# use this class to cache similar user, so we don't have to recalculate similar users
+similarityContainer = SimilarityContainer(reshapedData)
+
+
+print("Calculating best movies for the group using mean aggregation method")
+result = findBestMoviesForGroup(group, similarityContainer, movieIds, GroupAggregationMethod.Mean)
 print(result)
 
-
+print("Calculating best movies for the group using min aggregation method")
+result = findBestMoviesForGroup(group, similarityContainer, movieIds, GroupAggregationMethod.Min)
+print(result)
 
