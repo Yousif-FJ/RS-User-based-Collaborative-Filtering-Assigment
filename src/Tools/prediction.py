@@ -1,9 +1,41 @@
 import pandas as pd
-
+from .SimilarityContainer import *
 from .correlation import *
 
 
-def findBestMoviesForUser(similarUsersRatings : pd.DataFrame, targetUserRatings, movieIds : pd.Series):
+def findBestMoviesForGroup(data : pd.DataFrame, userGroupRatings : pd.DataFrame,
+                           movieIds) -> pd.Series:
+    movieIdWithRating = dict()
+    similarityContainer = SimilarityContainer(data)
+
+    for movieId in movieIds:
+        skipMovie = False
+        ratingSum = 0
+        for (userId, userRatings) in userGroupRatings.iterrows():
+
+            similarUsersRatings = similarityContainer.getSimilarUsers(userRatings)
+
+            predictedRating = predictRating(similarUsersRatings, userRatings, movieId)
+            if predictedRating == None:
+                skipMovie = True
+                break
+
+            ratingSum += predictedRating
+
+        if(skipMovie):
+            continue
+
+        numberOfUsersInAGroup = userGroupRatings.shape[0]
+        movieIdWithRating[movieId] = ratingSum/numberOfUsersInAGroup
+    
+    movieIdWithRating = pd.Series(movieIdWithRating).sort_values(ascending=False)
+
+    return movieIdWithRating.head(10)
+
+
+
+def findBestMoviesForUser(similarUsersRatings : pd.DataFrame, targetUserRatings : pd.Series,
+                           movieIds) -> pd.Series:
     movieIdWithRating = dict()
 
     for movieId in movieIds:
@@ -35,12 +67,19 @@ def predictRating(similarUsersRating : pd.DataFrame, targetUserRatings : pd.Seri
         IteratingUserRatingsAverage = ratings.mean()
         correlationBetweenUserRatings = CalculateCorrelation(targetUserRatings,ratings)
 
+        if correlationBetweenUserRatings == None:
+            continue
+
         RatingDifference = targetMovieRating - IteratingUserRatingsAverage
         numerator += correlationBetweenUserRatings * RatingDifference
     
     denominator = 0
     for userId, ratings in similarUsersRating.iterrows():
-        denominator += CalculateCorrelation(targetUserRatings, ratings)
+        correlationBetweenUserRatings = CalculateCorrelation(targetUserRatings,ratings)
+        if correlationBetweenUserRatings == None:
+            continue
+
+        denominator += correlationBetweenUserRatings
 
     neighborBias = numerator/denominator
 

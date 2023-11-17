@@ -16,7 +16,8 @@ def CalculateCorrelation(userRatings1 : pd.Series, userRatings2 : pd.Series) -> 
         return correlation
 
 
-def getSimilarUsersCorrelations(data : pd.DataFrame, userRating : pd.Series) -> pd.Series:
+
+def CalculateSimilarUsersCorrelations(data : pd.DataFrame, userRating : pd.Series) -> pd.Series:
 
     movieIdWithCorrelation = dict()
 
@@ -32,3 +33,10 @@ def getSimilarUsersCorrelations(data : pd.DataFrame, userRating : pd.Series) -> 
     movieIdWithCorrelation = pd.Series(movieIdWithCorrelation).dropna().sort_values(ascending=False)
 
     return movieIdWithCorrelation.loc[lambda value : value > 0.7]
+
+
+def CalculateSimilarUsers(data : pd.DataFrame, userRating : pd.Series) -> pd.DataFrame:
+    similarUsersCorrelation = CalculateSimilarUsersCorrelations(data, userRating)  
+    return data.loc[similarUsersCorrelation.index]
+
+

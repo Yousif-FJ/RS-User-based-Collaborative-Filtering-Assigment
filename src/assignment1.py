@@ -24,7 +24,7 @@ targetUserId = 1
 targetUserRatings = reshapedData.loc[targetUserId]
 
 # Find similar users to the target user
-similarUsersCorrelation = getSimilarUsersCorrelations(reshapedData, targetUserRatings)
+similarUsersCorrelation = CalculateSimilarUsersCorrelations(reshapedData, targetUserRatings)
 
 print(f'Most similar users to the user with Id {targetUserId}')
 print(similarUsersCorrelation)
@@ -32,7 +32,7 @@ print(similarUsersCorrelation)
 similarUsersRatings = reshapedData.loc[similarUsersCorrelation.index]
  
 
-movieIds = data['movieId']
+movieIds = data['movieId'].unique()
 
 bestMoviesForTargetUser = findBestMoviesForUser(similarUsersRatings, targetUserRatings, movieIds)
 
