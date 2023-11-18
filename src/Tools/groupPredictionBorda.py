@@ -6,7 +6,6 @@ from .prediction import *
 
 def findBestMoviesForGroupBorda(userGroupRatings : pd.DataFrame,
                             similarityContainer : SimilarityContainer, movieIds):
-    
     # Collect the ratings of each user in the group for each movie in the dataset
     users_MovieIdsRatings = dict()
     for (userId, userRatings) in userGroupRatings.iterrows():
@@ -25,7 +24,6 @@ def findBestMoviesForGroupBorda(userGroupRatings : pd.DataFrame,
         movieIdsRank = movieIdsRatings.rank(method='first')
         users_MovieIdsRatings[userId] = movieIdsRank
         
-
     # Sum up the ranking for each movie for every group member
     movieIdsGroupRank = dict()
     for movieId in movieIds:
@@ -35,5 +33,4 @@ def findBestMoviesForGroupBorda(userGroupRatings : pd.DataFrame,
         movieIdsGroupRank[movieId] = movieGroupRank
 
     movieIdsGroupRank = pd.Series(movieIdsGroupRank).sort_values(ascending=False)
-
     return movieIdsGroupRank.head(10)

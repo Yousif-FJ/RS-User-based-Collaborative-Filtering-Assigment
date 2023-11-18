@@ -1,0 +1,41 @@
+Calculating best movies for the group using mean aggregation method
+Result represent movieId, predicted group rating
+ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  warnings.warn(stats.ConstantInputWarning(msg))
+2762     5.101297
+60684    4.841257
+48516    4.533381
+2858     4.510075
+3863     4.473529
+54286    4.427493
+2692     4.422276
+3578     4.422079
+2571     4.414120
+4878     4.412256
+dtype: float64
+Calculating best movies for the group using min aggregation method
+Result represent movieId, predicted group least misery rating
+3863     4.003544
+6934     3.906081
+53996    3.906081
+8371     3.906081
+54286    3.906081
+33493    3.906081
+6365     3.906081
+6874     3.906081
+3977     3.721218
+593      3.714782
+dtype: float64
+Calculating best movies for the group using borda aggregation method
+Result represent movieId, rank summation
+2762     29008.0
+60684    28995.0
+48516    28894.0
+3578     28875.0
+2571     28856.0
+8961     28823.0
+7438     28810.0
+3863     28783.0
+6874     28781.0
+1198     28763.0
+dtype: float64

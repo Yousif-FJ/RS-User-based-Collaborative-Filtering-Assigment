@@ -16,7 +16,6 @@ def findBestMoviesForGroup(userGroupRatings : pd.DataFrame,
     movieIdWithRating = dict()
 
     for movieId in movieIds:
-        skipMovie = False
         movieRatings = []
         for (userId, userRatings) in userGroupRatings.iterrows():
 
@@ -24,13 +23,9 @@ def findBestMoviesForGroup(userGroupRatings : pd.DataFrame,
 
             predictedRating = predictRating(similarUsersRatings, userRatings, movieId)
             if predictedRating == None:
-                skipMovie = True
-                break
-            else:
-                movieRatings.append(predictedRating)
+                predictedRating = 2.5
+            movieRatings.append(predictedRating)
 
-        if(skipMovie):
-            continue
 
         if(aggregationMethod == GroupAggregationMethod.Mean):
             movieIdWithRating[movieId] =  sum(movieRatings)/len(movieRatings)

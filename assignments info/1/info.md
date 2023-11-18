@@ -7,7 +7,7 @@ Here are some things about the implementation:
 - For pearson correlation, we only take into account when 2 users have more than 4 common movies with ratings. This help to improve the reliability of the result.
 - We use threshold of 0.7 for correlation to find the similar users.
 - We used the following prediction function:
-![predictionFunction](markdownResources/predictionFunction.png)
+![predictionFunction](/predictionFunction.png)
 - Some movie ratings we are unable to make a user preference prediction because not enough similar users in the data set. Those items are skipped when search for relevant movies.
 
 
