@@ -11,8 +11,7 @@ class GroupAggregationMethod(Enum):
 
 def findBestMoviesForGroup(userGroupRatings : pd.DataFrame,
                             similarityContainer : SimilarityContainer,
-                            movieIds,
-                            aggregationMethod : GroupAggregationMethod
+                            movieIds, aggregationMethod : GroupAggregationMethod
                             ) -> pd.Series:
     movieIdWithRating = dict()
 
@@ -27,8 +26,8 @@ def findBestMoviesForGroup(userGroupRatings : pd.DataFrame,
             if predictedRating == None:
                 skipMovie = True
                 break
-
-            movieRatings.append(predictedRating)
+            else:
+                movieRatings.append(predictedRating)
 
         if(skipMovie):
             continue
