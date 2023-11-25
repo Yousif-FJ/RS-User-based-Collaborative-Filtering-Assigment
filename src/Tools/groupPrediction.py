@@ -3,6 +3,7 @@ from .SimilarityContainer import *
 from .correlation import *
 from .prediction import *
 from enum import Enum
+import numpy as np
 
 class GroupAggregationMethod(Enum):
     Mean = 1
@@ -11,8 +12,8 @@ class GroupAggregationMethod(Enum):
 
 def findBestMoviesForGroup(userGroupRatings : pd.DataFrame,
                             similarityContainer : SimilarityContainer,
-                            movieIds, aggregationMethod : GroupAggregationMethod
-                            ) -> pd.Series:
+                            movieIds, aggregationMethod : GroupAggregationMethod,
+                            meanWeights : [] = None) -> pd.Series:
     movieIdWithRating = dict()
 
     for movieId in movieIds:
@@ -20,15 +21,16 @@ def findBestMoviesForGroup(userGroupRatings : pd.DataFrame,
         for (userId, userRatings) in userGroupRatings.iterrows():
 
             similarUsersRatings = similarityContainer.getSimilarUsers(userRatings)
+            
+            movieRating = predictRating(similarUsersRatings, userRatings, movieId)
 
-            predictedRating = predictRating(similarUsersRatings, userRatings, movieId)
-            if predictedRating == None:
-                predictedRating = 2.5
-            movieRatings.append(predictedRating)
+            if movieRating is None:
+                movieRating = 2.5
+            movieRatings.append(movieRating)
 
 
         if(aggregationMethod == GroupAggregationMethod.Mean):
-            movieIdWithRating[movieId] =  sum(movieRatings)/len(movieRatings)
+            movieIdWithRating[movieId] =  np.average(movieRatings, weights= meanWeights)
         else :
             movieIdWithRating[movieId] =  min(movieRatings)
     

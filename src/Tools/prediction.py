@@ -19,7 +19,15 @@ def findBestMoviesForUser(similarUsersRatings : pd.DataFrame, targetUserRatings 
 
 
 
-def predictRating(similarUsersRating : pd.DataFrame, targetUserRatings : pd.Series, targetMovieId : int) -> float :
+
+
+def predictRating(similarUsersRating : pd.DataFrame, targetUserRatings : pd.Series,
+                   targetMovieId : int, getActualValueIfExist = True) -> float :
+
+    if(getActualValueIfExist):
+        ratingResult = targetUserRatings.get(targetMovieId)
+        if(pd.isna(ratingResult) == False):
+            return ratingResult
 
     #filter users who don't have rating on the target movie
     similarUsersRating = similarUsersRating[~similarUsersRating[targetMovieId].isna()]
