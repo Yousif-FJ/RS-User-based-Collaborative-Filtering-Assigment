@@ -1,0 +1,3 @@
+ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  warnings.warn(stats.ConstantInputWarning(msg))
+{2762: 5.101296903300647, 60684: 4.532417291727323, 3703: 4.375}

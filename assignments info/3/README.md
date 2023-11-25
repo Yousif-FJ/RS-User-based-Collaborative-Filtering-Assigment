@@ -13,7 +13,7 @@ The algorithm is as follows:
 
 
 ### Example:
-We will consider a simple example to show how this method logically works. Example code run for this same example can be found in the file `sequentialRecommendationExample.py`
+We will consider a simple example to show how this method logically works. Example code run for this same example can be found in the file `src/sequentialRecommendationExample.py`
 
 Suppose we have the following data, started with group mean aggregation as follows:
 
@@ -53,7 +53,13 @@ The method takes inspiration from the least misery method, but applies in a sequ
 
 
 ### Assumptions and Information:
-- The main code for the method can be found in `tools\sequentialGroupPrediction`.
+- The main code for the method can be found in `src/tools/sequentialGroupPrediction`.
 - The implementation depends on previous assignments for prediction, correlation and group recommendation.
 - Least satisfied user is the user who would rate the recommended item the lowest out of the group. 
 - The class `SimilarityContainer` was used to cache the similar users.
+
+
+### Movie Lens run
+The code for that run can be found in `src/assignment3.py`
+
+Example run were also provided in this folder. The code may take a minute to finish.
