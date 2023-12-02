@@ -1,0 +1,63 @@
+ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  warnings.warn(stats.ConstantInputWarning(msg))
+2762     5.101297
+60684    4.841257
+3863     4.473529
+54286    4.427493
+4878     4.412256
+8961     4.409594
+1625     4.389650
+2571     4.361386
+7438     4.345133
+96079    4.341257
+dtype: float64
+['The group predicted rating is 3.803208754654309.',
+ 'There (is)are 10 item(s) with good/better group ratings in the best items results.',
+  'Group member 3 had lower predicted rating of 2.0035444947209653 for the item.',
+  '1 of the similar user to the Group members have lower rating for this item', 'movie Id 1073']
+
+['The group predicted rating is 3.6264019686339863.',
+ 'There (is)are 10 item(s) with good/better group ratings in the best items results.',
+  'Group member 3 had lower predicted rating of 1.4731241366599968 for the item.',
+  '2 of the similar user to the Group members have lower rating for this item',
+  'movie Id 919']
+
+['Similar users to user 1 did not reviews this item.',
+ 'Group member 2 had lower predicted rating of 2.406081769241961 for the item.',
+  'Similar users to user 3 did not reviews this item.',
+   '1 of the similar user to the Group members have lower rating for this item',
+    'movie Id 788']
+
+['The group predicted rating is 2.763927162521364.',
+ 'There (is)are 10 item(s) with good/better group ratings in the best items results.',
+ 'Group member 3 had lower predicted rating of 2.0033524723657816 for the item.',
+'movie Id 780']
+
+['Group member 2 had lower predicted rating of 0.43182849364791265 for the item.',
+ 'Similar users to user 3 did not reviews this item.',
+  '1 of the similar user to the Group members have lower rating for this item',
+   'movie Id 743']
+
+['The group predicted rating is 3.1040542304593095.',
+ 'There (is)are 10 item(s) with good/better group ratings in the best items results.',
+  'Group member 1 had lower rating of 3.0 for the item.',
+   'Group member 3 had lower predicted rating of 2.406080922135968 for the item.',
+    'movie Id 736']
+
+['Group member 2 had lower predicted rating of 2.406081769241961 for the item.',
+ 'Similar users to user 3 did not reviews this item.',
+  '1 of the similar user to the Group members have lower rating for this item',
+   'movie Id 594']
+
+['The group predicted rating is 2.966037482059368.',
+ 'There (is)are 10 item(s) with good/better group ratings in the best items results.',
+ 'Group member 3 had lower predicted rating of 0.4060809221359678 for the item.',
+  '1 of the similar user to the Group members have lower rating for this item',
+  'movie Id 587']
+
+['The group predicted rating is 1.5499535951147514.',
+ 'There (is)are 10 item(s) with good/better group ratings in the best items results.',
+  'Group member 2 had lower predicted rating of 1.4060817692419612 for the item.',
+  'Group member 3 had lower predicted rating of -0.3941025641025644 for the item.',
+  '2 of the similar user to the Group members have lower rating for this item',
+  'movie Id 586']

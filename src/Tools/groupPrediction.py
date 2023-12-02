@@ -9,7 +9,6 @@ class GroupAggregationMethod(Enum):
     Mean = 1
     Min = 2
 
-
 def findBestMoviesForGroup(userGroupRatings : pd.DataFrame,
                             similarityContainer : SimilarityContainer,
                             movieIds, aggregationMethod : GroupAggregationMethod,
@@ -37,3 +36,23 @@ def findBestMoviesForGroup(userGroupRatings : pd.DataFrame,
     movieIdWithRating = pd.Series(movieIdWithRating).sort_values(ascending=False)
 
     return movieIdWithRating.head(10)
+
+
+def predictRatingForGroup(userGroupRatings : pd.DataFrame,
+                            similarityContainer : SimilarityContainer, movieId) -> float:
+    
+    movieRatings = []
+    for (userId, userRatings) in userGroupRatings.iterrows():
+
+        similarUsersRatings = similarityContainer.getSimilarUsers(userRatings)
+        
+        movieRating = predictRating(similarUsersRatings, userRatings, movieId)
+
+        if movieRating is None:
+            break
+        movieRatings.append(movieRating)
+
+    if(len(movieRatings) < userGroupRatings.shape[0]) :
+        return None
+
+    return np.average(movieRatings)
